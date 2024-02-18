@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: jusan_test
+      POSTGRES_PASSWORD: jusan_test
+      POSTGRES_DB: jusan_test
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: uvicorn server:app --host 0.0.0.0 --reload
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://user:password@db:5432/mydatabase
+
+volumes:
+  postgres_data:
