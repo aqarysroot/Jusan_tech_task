@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from typing import Optional
 import uvicorn
 
-DATABASE_URL = "postgresql://jusan_test:jusan_test@localhost:5432/jusan_test"
+DATABASE_URL = "postgresql://jusan_test:jusan_test@db:5432/jusan_test"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
